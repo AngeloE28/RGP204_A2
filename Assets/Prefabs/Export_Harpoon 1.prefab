@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255944484723147469}
-  m_LocalRotation: {x: -1, y: -0, z: -0, w: 0}
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 1.0039902, y: -0.24762401, z: 1.7843399}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
@@ -52,9 +52,15 @@ MonoBehaviour:
   bullet: {fileID: 1598345111765489522, guid: 2df1fbd9e26209647a86461c046b9843, type: 3}
   attackPoint: {fileID: 5709386267432793081}
   playerCam: {fileID: 0}
+  floorMask:
+    serializedVersion: 2
+    m_Bits: 256
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
   timeBetweenShots: 0.1
   fireRate: 0.01
-  canSpray: 1
+  canSpray: 0
   canBurstShot: 0
   bulletsPerClick: 1
   bulletSpread: 10
@@ -272,8 +278,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4556148049802364670}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.045598373, y: 0.029287238, z: 2.9802322e-10}
-  m_LocalScale: {x: 0.57536733, y: 1, z: 1}
+  m_LocalPosition: {x: -0.0467, y: 0.0371, z: 0}
+  m_LocalScale: {x: 0.37736043, y: 0.65586, z: 0.65586}
   m_Children: []
   m_Father: {fileID: 632364920730851447}
   m_RootOrder: 1
@@ -350,13 +356,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7234986979118738452}
-  m_LocalRotation: {x: 0.6087614, y: -0, z: -0, w: 0.7933533}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.009102346, y: 0.03645378, z: 0}
   m_LocalScale: {x: 1.3968427, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 632364920730851447}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &4719027414056132539
 MeshFilter:
   m_ObjectHideFlags: 0

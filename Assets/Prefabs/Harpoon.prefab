@@ -5900,6 +5900,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRb: {fileID: 7500601430810854251}
-  damage: 0
+  damage: 20
   hitPoint: {x: 0, y: 0, z: 0}
   shootForce: 50

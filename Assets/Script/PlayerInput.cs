@@ -15,7 +15,7 @@ public class PlayerInput : MonoBehaviour
     float xRotation = 0, yRotation = 0;
     float mouseSensitivity = 100f;
 
-    float speed = 0;
+    //float speed = 0;
 
     // Start is called before the first frame update
     void Start()
