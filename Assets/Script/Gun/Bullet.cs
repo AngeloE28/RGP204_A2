@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
     {    
         if(other.tag == "Starfish")
         {
-            other.GetComponent<CoralSpawner>().FishTakeDamage(damage);
+            other.GetComponent<StarFishHealth>().FishTakeDamage(damage);
         }
     }
 }
