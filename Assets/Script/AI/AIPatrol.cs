@@ -85,8 +85,6 @@ public class AIPatrol : MonoBehaviour
 
     private void Move()
     {
-        //transform.position = Vector3.MoveTowards(transform.position, patrolNode, speed * Time.deltaTime);
-
         Vector3 moveDir = (patrolNode - transform.position).normalized;
 
         Vector3 desiredVelocity = moveDir * forwardAccel * accelMultiplier;
