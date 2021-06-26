@@ -71,12 +71,9 @@ public class GunProjectile : MonoBehaviour
         else
             targetPoint = ray.GetPoint(100);
 
-        // Rotation that bullet will be spawned
-        Quaternion fireRotation = Quaternion.LookRotation(transform.forward);
-
         // Spawn the bullet
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.Euler(fireRotation.eulerAngles.x, fireRotation.eulerAngles.y, fireRotation.eulerAngles.z - 90));
-        currentBullet.GetComponent<Bullet>().hitPoint = targetPoint;
+        GameObject currentBullet = Instantiate(bullet, attackPoint.position, playerCam.transform.rotation);
+        currentBullet.GetComponentInChildren<Bullet>().hitPoint = targetPoint;
 
         // Destroy bullet after 2 sec
         Destroy(currentBullet.gameObject, 2.0f);
@@ -105,7 +102,9 @@ public class GunProjectile : MonoBehaviour
         // Add spread for burst option for gun
 
         Vector3 target;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, floorMask))
+            target = hit.point;
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, enemyMask))
             target = hit.point;
         else
             target = ray.GetPoint(100);
@@ -117,8 +116,8 @@ public class GunProjectile : MonoBehaviour
         Vector3 spread = new Vector3(xDir, yDir, 0.0f) + target;
 
         // Spawn the bullet
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.Euler(fireRotation.eulerAngles.x, fireRotation.eulerAngles.y, fireRotation.eulerAngles.z - 90));
-        currentBullet.GetComponent<Bullet>().hitPoint = spread;
+        GameObject currentBullet = Instantiate(bullet, attackPoint.position, playerCam.transform.rotation);
+        currentBullet.GetComponentInChildren<Bullet>().hitPoint = spread;
 
         // Destroy bullet after 2 sec
         Destroy(currentBullet.gameObject, 2.0f);

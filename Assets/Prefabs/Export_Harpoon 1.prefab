@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550c8c7f5739a554ebd34e19b33db540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1598345111765489522, guid: 2df1fbd9e26209647a86461c046b9843, type: 3}
+  bullet: {fileID: 5021864818022350610, guid: 125842e20d2d59f48a23af73c5cbfb4b, type: 3}
   attackPoint: {fileID: 5709386267432793081}
   playerCam: {fileID: 0}
   floorMask:
@@ -58,11 +58,11 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 512
-  timeBetweenShots: 0.1
-  fireRate: 0.01
-  canSpray: 0
-  canBurstShot: 0
-  bulletsPerClick: 1
+  timeBetweenShots: 0.5
+  fireRate: 0.001
+  canSpray: 1
+  canBurstShot: 1
+  bulletsPerClick: 10
   bulletSpread: 10
 --- !u!1 &437347282491010131
 GameObject:
