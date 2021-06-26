@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Spawner starfishSpawner;
     public bool isGameRunning = true;
     public bool isGamePaused;
+    private bool controlledPop;
     private bool playerWin;
 
     [Header("UI")]
@@ -46,12 +47,9 @@ public class GameManager : MonoBehaviour
             Cursor.visible = false;
         if (!isGameRunning)
             Cursor.visible = true;
-    }
 
-    private void LateUpdate()
-    {
         WinCondition();
-    }
+    } 
 
     private void WinCondition()
     {
@@ -59,15 +57,23 @@ public class GameManager : MonoBehaviour
         {
             playerWin = true;
             isGameRunning = false;
+            controlledPop = false;
         }
         if(coralSpawner.prefabCounter.Length <= 0)
         {
             playerWin = false;
             isGameRunning = false;
+            controlledPop = false;
+        }
+        if (coralSpawner.prefabCounter.Length == coralSpawner.maxNumberofPrefabs * 0.6)
+        {
+            playerWin = true;
+            isGameRunning = false;
+            controlledPop = true;
         }
 
         if (!isGameRunning)
-            GameOver(playerWin);
+            GameOver(playerWin, controlledPop);
     }
 
     private void Pause()
@@ -96,11 +102,15 @@ public class GameManager : MonoBehaviour
         isGamePaused = false;
     }
 
-    public void GameOver(bool isWin)
+    public void GameOver(bool isWin, bool isCont)
     {
-        if (isWin)
-            winMsg.text = "You saved the reef!";
-        else
+        Time.timeScale = 0.0f;
+
+        if (isWin && isCont)
+            winMsg.text = "Balance to the reef is Restored!";
+        else if (isWin && !isCont)
+            winMsg.text = "Starfish are Gone!\nCoral overload Incoming!";
+        else if (!isWin && !isCont)
             winMsg.text = "The starfish ate all the corals!";
 
         Cursor.visible = true;

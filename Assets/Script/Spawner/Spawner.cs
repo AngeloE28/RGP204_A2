@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject floor;
     public LayerMask floorMask;
+    public GameManager gameManager;
 
     [Header("Spawn Values")]
     public GameObject[] prefab;
@@ -29,16 +30,25 @@ public class Spawner : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GetFloorSize();
         spawn = SpawnPrefab();
+        StartCoroutine(spawn);
+        prefabCounter = GameObject.FindGameObjectsWithTag(gameObjectTag);
+    }
+
+    private void Update()
+    {      
+        prefabCounter = GameObject.FindGameObjectsWithTag(gameObjectTag);
+        if (!gameManager.isGameRunning)
+            StopAllCoroutines();
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        prefabCounter = GameObject.FindGameObjectsWithTag(gameObjectTag);
+
         spawnTimer = Random.Range(spawnMinWait, spawnMaxWait);
         
         if(!stop && restart)
@@ -56,7 +66,7 @@ public class Spawner : MonoBehaviour
             StopCoroutine(spawn);
         }
 
-        if (prefabCounter.Length <= minNumberofPrefabs && prefabCounter.Length < maxNumberofPrefabs)
+        if (prefabCounter.Length < minNumberofPrefabs)
             restart = true;
     }
 
