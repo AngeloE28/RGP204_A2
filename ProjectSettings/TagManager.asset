@@ -8,6 +8,7 @@ TagManager:
   - Barrier
   - Starfish
   - Floor
+  - Coral
   layers:
   - Default
   - TransparentFX

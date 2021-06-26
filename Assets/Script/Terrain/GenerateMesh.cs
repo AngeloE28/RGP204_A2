@@ -14,12 +14,11 @@ public class GenerateMesh : MonoBehaviour
     public int width = 20;
     public int height = 20;
 
-    public int octaves;
+    public int octaves = 8;
     public float persistence = 0.5f;
-    public float heightMultiplier;
-    public float lacunarity;
-    public float scale;
-    private float total;
+    public float heightMultiplier = 8.0f;
+    public float lacunarity = 2.0f;
+    public float scale = 20.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -70,11 +69,12 @@ public class GenerateMesh : MonoBehaviour
         }
     }
 
-    float PerlinNoiseData(int x, int z)
+    public float PerlinNoiseData(int x, int z)
     {
         float amplitude = 1;
         float frequency = 1;
         float noiseHeight = 0;
+        float total = 0;
 
         float maxNoiseHeight = float.MaxValue;
         float minNoiseHeight = float.MinValue;

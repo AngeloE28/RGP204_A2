@@ -14,6 +14,12 @@ public class StarFishHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Coral")
+            Destroy(other.gameObject);
+    }
+
     public void FishTakeDamage(float amount)
     {
         currentHealth -= amount;

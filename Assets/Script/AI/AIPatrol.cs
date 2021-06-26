@@ -6,7 +6,7 @@ public class AIPatrol : MonoBehaviour
 {
     public Rigidbody aiRB;
     public SphereCollider aiControllerCollider;
-    public MeshCollider starfishCollider;
+    public SphereCollider starfishCollider;
 
     public float forwardAccel;
     public float accelMultiplier;
@@ -42,6 +42,8 @@ public class AIPatrol : MonoBehaviour
         Physics.IgnoreCollision(aiControllerCollider, starfishCollider, true);
 
         transform.position = aiRB.transform.position;
+        if (aiRB.transform.position.y < -10)
+            aiRB.transform.position = new Vector3(aiRB.transform.position.x, 5.0f, aiRB.transform.position.z);
     }
 
     private void FixedUpdate()
