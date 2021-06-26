@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject finishedWindow;
     public TMP_Text winMsg;
     public GameObject pauseWindow;
+    public GameObject crosshair;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,10 @@ public class GameManager : MonoBehaviour
             Cursor.visible = false;
         if (!isGameRunning)
             Cursor.visible = true;
+    }
 
+    private void LateUpdate()
+    {
         WinCondition();
     }
 
@@ -68,6 +72,10 @@ public class GameManager : MonoBehaviour
 
     private void Pause()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        crosshair.SetActive(false);
         pauseWindow.SetActive(true);
 
         Time.timeScale = 0.0f;
@@ -77,6 +85,10 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        crosshair.SetActive(true);
         pauseWindow.SetActive(false);
 
         Time.timeScale = 1.0f;
@@ -91,6 +103,9 @@ public class GameManager : MonoBehaviour
         else
             winMsg.text = "The starfish ate all the corals!";
 
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        crosshair.SetActive(false);
         finishedWindow.SetActive(true);
     }
 

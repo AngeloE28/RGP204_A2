@@ -12,9 +12,8 @@ public class FPS_Camera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        // Make crosshair so this line can be false
-        Cursor.visible = true;
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -28,7 +27,6 @@ public class FPS_Camera : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
         player.Rotate(Vector3.up * mouseX);
-
 
     }
 }

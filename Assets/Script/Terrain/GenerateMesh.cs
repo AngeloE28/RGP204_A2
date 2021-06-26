@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,8 @@ public class GenerateMesh : MonoBehaviour
     Vector3[] vertices;
     int[] indices;
 
+    public bool isInfinite = false;
+
     public int width = 20;
     public int height = 20;
 
@@ -19,15 +20,33 @@ public class GenerateMesh : MonoBehaviour
     public float heightMultiplier = 8.0f;
     public float lacunarity = 2.0f;
     public float scale = 20.0f;
+
+    public float xOffset = 100f;
+    public float zOffset = 100f;
     
     // Start is called before the first frame update
     void Start()
     {
+        xOffset = Random.Range(0.0f, 9999.0f);
+        zOffset = Random.Range(0.0f, 9999.0f);
+
         mesh = new Mesh();
         Mesh.GetComponent<MeshFilter>().mesh = mesh;
 
         CreateMesh();
         UpdateMesh();
+    }
+
+    private void Update()
+    {
+        if (isInfinite)
+        {
+            CreateMesh();
+            UpdateMesh();
+
+            xOffset += Time.deltaTime / 2.0f;
+            //zOffset += Time.deltaTime / 2.0f;
+        }
     }
 
     private void CreateMesh()
@@ -69,7 +88,7 @@ public class GenerateMesh : MonoBehaviour
         }
     }
 
-    public float PerlinNoiseData(int x, int z)
+    private float PerlinNoiseData(int x, int z)
     {
         float amplitude = 1;
         float frequency = 1;
@@ -81,8 +100,8 @@ public class GenerateMesh : MonoBehaviour
 
         for (int i = 0; i < octaves; i++)
         {
-            float xCoord = (float)x / scale * frequency;
-            float zCoord = (float)z / scale * frequency;
+            float xCoord = ((float)x / scale * frequency) + xOffset;
+            float zCoord = ((float)z / scale * frequency) + zOffset;
             float sample = Mathf.PerlinNoise(xCoord, zCoord) * 2 - 1;
             noiseHeight += sample * amplitude;
             amplitude *= persistence;
