@@ -101,13 +101,15 @@ public class Spawner : MonoBehaviour
 
                         Vector3 finalSpawnPos = new Vector3(semiFinalSpawnPos.x, semiFinalSpawnPos.y + 2.0f, semiFinalSpawnPos.z);
 
-                        Instantiate(obj, finalSpawnPos, Quaternion.identity);
+                        GameObject newObject = Instantiate(obj, finalSpawnPos, Quaternion.identity);
+                        newObject.transform.SetParent(this.gameObject.transform);  
                     }
                     else
                     {
                         Vector3 finalSpawnPos = hit.point;
 
-                        Instantiate(obj, finalSpawnPos, Quaternion.identity);
+                        GameObject newObject = Instantiate(obj, finalSpawnPos, Quaternion.identity);
+                        newObject.transform.SetParent(this.gameObject.transform);
                     }
 
                 }

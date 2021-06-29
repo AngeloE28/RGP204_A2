@@ -6,6 +6,7 @@ public class GunProjectile : MonoBehaviour
 {
     public GameObject bullet; // The bullet to be instantiated
     public Transform attackPoint;
+    public Transform bulletCollection;
     public Camera playerCam;
     public LayerMask floorMask;
     public LayerMask enemyMask;
@@ -46,11 +47,18 @@ public class GunProjectile : MonoBehaviour
 
         if(readyToShoot && shooting)
         {
+
             bulletsShot = 0;
             if (!canBurstShot)
+            {
                 Shoot();
+                //Debug.Log("Test 1");
+            }
             else
+            {
                 BurstShot();
+                //Debug.Log("Test 2");
+            }
         }
     }
 
@@ -102,12 +110,17 @@ public class GunProjectile : MonoBehaviour
         // Add spread for burst option for gun
 
         Vector3 target;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, floorMask))
-            target = hit.point;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, floorMask)) {
+            // For some reason this shoots out in funky direction
+            //target = hit.point;
+            target = ray.GetPoint(100);
+        }
         else if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, enemyMask))
             target = hit.point;
         else
+        {
             target = ray.GetPoint(100);
+        }
 
         // Calculate the bullet spread
         float xDir = Random.Range(-bulletSpread, bulletSpread);
@@ -118,6 +131,7 @@ public class GunProjectile : MonoBehaviour
         // Spawn the bullet
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, playerCam.transform.rotation);
         currentBullet.GetComponentInChildren<Bullet>().hitPoint = spread;
+        currentBullet.transform.SetParent(bulletCollection);
 
         // Destroy bullet after 2 sec
         Destroy(currentBullet.gameObject, 2.0f);
