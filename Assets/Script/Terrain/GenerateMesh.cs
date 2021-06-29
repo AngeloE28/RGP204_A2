@@ -102,7 +102,7 @@ public class GenerateMesh : MonoBehaviour
         {
             float xCoord = ((float)x / scale * frequency) + xOffset;
             float zCoord = ((float)z / scale * frequency) + zOffset;
-            float sample = Mathf.PerlinNoise(xCoord, zCoord) * 2 - 1;
+            float sample = Mathf.PerlinNoise(xCoord, zCoord) * 2 - 1; // * 2 - 1 allows for negative values
             noiseHeight += sample * amplitude;
             amplitude *= persistence;
             frequency *= lacunarity;
