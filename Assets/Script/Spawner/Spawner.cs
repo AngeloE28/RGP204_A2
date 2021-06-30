@@ -7,11 +7,11 @@ public class Spawner : MonoBehaviour
     public GameObject floor;
     public LayerMask floorMask;
     public GameManager gameManager;
-
+        
     [Header("Spawn Values")]
     public GameObject[] prefab;
     public GameObject[] prefabCounter;
-    public int prefabNumberPerSpawn = 5;
+    public int prefabNumberPerSpawn = 10;
     public int maxNumberofPrefabs = 1250;
     public int minNumberofPrefabs = 50;
     public bool isStarfish = false;
@@ -88,7 +88,7 @@ public class Spawner : MonoBehaviour
 
                 Vector2 spawnPosV2 = Random.insideUnitCircle * radius;
 
-                Vector3 spawnPos = new Vector3(spawnPosV2.x, 2.0f, spawnPosV2.y);
+                Vector3 spawnPos = new Vector3(spawnPosV2.x, 10.0f, spawnPosV2.y);
 
                 Vector3 transformOffsetSpawnPos = transform.position + spawnPos;
 

@@ -9,6 +9,7 @@ TagManager:
   - Starfish
   - Floor
   - Coral
+  - Seaweed
   layers:
   - Default
   - TransparentFX
