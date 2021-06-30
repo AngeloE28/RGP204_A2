@@ -87,6 +87,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
 
         isGamePaused = true;
+        coralSpawner.isPaused = true;
+        starfishSpawner.isPaused = true;
     }
 
     public void Resume()
@@ -100,6 +102,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
 
         isGamePaused = false;
+        coralSpawner.isPaused = false;
+        starfishSpawner.isPaused = false;
     }
 
     public void GameOver(bool isWin, bool isCont)

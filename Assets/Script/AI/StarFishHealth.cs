@@ -6,7 +6,7 @@ using UnityEngine;
 public class StarFishHealth : MonoBehaviour
 {
     public float maxHealth;
-    private float currentHealth;
+    public float currentHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +24,13 @@ public class StarFishHealth : MonoBehaviour
     {
         currentHealth -= amount;
         if (currentHealth <= 0)
-            Invoke("SpawnCoral", 0.5f);
+            Invoke("Death", 0.5f);
     }
 
-    private void SpawnCoral()
+    private void Death()
     {
-        // Disable the game object
-        gameObject.SetActive(false);
+        // Destory the prefab and the controller
+        Destroy(this.gameObject);
     }
   
 }

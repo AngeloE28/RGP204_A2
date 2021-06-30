@@ -25,6 +25,8 @@ public class Spawner : MonoBehaviour
     
     private bool stop = false;
     private bool restart = true;
+    private bool running = true;
+    public bool isPaused = false;
     private float radius;
     private IEnumerator spawn;
 
@@ -51,16 +53,16 @@ public class Spawner : MonoBehaviour
 
         spawnTimer = Random.Range(spawnMinWait, spawnMaxWait);
         
-        if(!stop && restart)
+        if(!stop && restart && !running && !isPaused)
         {
             StartCoroutine(spawn);
             stop = true;
             restart = false;
-        }
+        }       
 
         if (prefabCounter.Length < maxNumberofPrefabs)
             stop = false;
-        else if (prefabCounter.Length > maxNumberofPrefabs)
+        else if (prefabCounter.Length > maxNumberofPrefabs || isPaused)
         {
             stop = true;
             StopCoroutine(spawn);
@@ -82,6 +84,7 @@ public class Spawner : MonoBehaviour
 
         while (true)
         {
+            running = true;
             for (int i = 0; i < prefabNumberPerSpawn; i++)
             {
                 GameObject obj = prefab[Random.Range(0, prefab.Length)];
@@ -116,6 +119,7 @@ public class Spawner : MonoBehaviour
             }
 
             yield return new WaitForSeconds(spawnTimer);
+            running = false;
         }
     }
 }
